@@ -14,6 +14,14 @@ class ProductPage extends StatelessWidget {
         title: const Text('Katalog BLOC UTD'),
         actions: [
           IconButton(
+            icon: const Icon(Icons.cloud_sync), // Ikon awan sinkronisasi
+            tooltip: 'Pengaturan Background', // Teks kecil saat ikon ditahan
+            onPressed: () {
+              // Berpindah ke halaman sync menggunakan GoRouter
+              context.push('/sync'); 
+            },
+          ),
+          IconButton(
             icon: const Icon(Icons.settings_system_daydream),
             onPressed: () => context.push('/native'),
           ),

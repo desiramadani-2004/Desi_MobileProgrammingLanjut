@@ -9,6 +9,7 @@ import 'package:utd_advanced_app/core/di/injection.dart';
 import 'package:utd_advanced_app/features/product/presentation/pages/crypto_page.dart';
 import 'package:utd_advanced_app/features/todo/presentation/pages/todo_page.dart';
 import 'package:utd_advanced_app/features/native/presentation/pages/native_page.dart';
+import 'package:utd_advanced_app/features/sync/presentation/pages/background_sync_page.dart';
 
 class AppRouter {
   static final router = GoRouter(
@@ -47,6 +48,10 @@ class AppRouter {
       GoRoute( 
         path: '/native', 
         builder: (context, state) => const NativePage(), 
+      ),
+      GoRoute(
+        path: '/sync',
+        builder: (context, state) => const BackgroundSyncPage(),
       ), 
 
     ],
