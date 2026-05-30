@@ -13,6 +13,14 @@ class ProductPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Katalog BLOC UTD'),
         actions: [
+          // TOMBOL BARU: HALAMAN ANIMASI
+          IconButton(
+            icon: const Icon(Icons.animation), 
+            tooltip: 'Halaman Animasi',
+            onPressed: () {
+              context.push('/animation'); 
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.cloud_sync), // Ikon awan sinkronisasi
             tooltip: 'Pengaturan Background', // Teks kecil saat ikon ditahan

@@ -10,6 +10,7 @@ import 'package:utd_advanced_app/features/product/presentation/pages/crypto_page
 import 'package:utd_advanced_app/features/todo/presentation/pages/todo_page.dart';
 import 'package:utd_advanced_app/features/native/presentation/pages/native_page.dart';
 import 'package:utd_advanced_app/features/sync/presentation/pages/background_sync_page.dart';
+import 'package:utd_advanced_app/features/animation/presentation/pages/animation_page.dart';
 
 class AppRouter {
   static final router = GoRouter(
@@ -53,6 +54,10 @@ class AppRouter {
         path: '/sync',
         builder: (context, state) => const BackgroundSyncPage(),
       ), 
+      GoRoute(
+        path: '/animation',
+        builder: (context, state) => const AnimationPage(),
+      ),
 
     ],
     errorBuilder: (context, state) => Scaffold(
