@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
+import 'package:utd_advanced_app/core/config/env_config.dart';
 
 class ApiClient {
   final Dio dio;
@@ -7,7 +8,7 @@ class ApiClient {
 
   ApiClient() : dio = Dio() {
     // 1. Konfigurasi Dasar
-    dio.options.baseUrl = 'https://fakestoreapi.com'; // API publik gratis
+    dio.options.baseUrl = EnvConfig.baseUrl;
     dio.options.connectTimeout = const Duration(seconds: 10);
     dio.options.receiveTimeout = const Duration(seconds: 10);
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:utd_advanced_app/core/theme/app_theme.dart';
 import 'package:utd_advanced_app/core/routing/app_router.dart';
 import 'package:utd_advanced_app/core/di/injection.dart';
+import 'package:utd_advanced_app/core/config/env_config.dart'; // 1. IMPORT CONFIG BARU DI SINI! [cite: 324]
 import 'package:workmanager/workmanager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/intl.dart';
@@ -57,7 +58,8 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // Ubah dari MaterialApp biasa menjadi MaterialApp.router
     return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
+      // 2. SEKARANG PITA DEBUG INI BISA DIKONTROL DARI TERMINAL / LAUNCH PROFILE! [cite: 331]
+      debugShowCheckedModeBanner: EnvConfig.showDebugBanner,
       title: 'UTD Advanced App',
       theme: AppTheme.lightTheme,
       // Masukkan konfigurasi rute dari app_router.dart

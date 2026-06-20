@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:utd_advanced_app/core/config/env_config.dart'; // 1. IMPORT ENV CONFIG DI SINI
 import '../cubit/product_cubit.dart';
 import '../cubit/product_state.dart';
 
@@ -11,9 +12,13 @@ class ProductPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Katalog BLOC UTD'),
+        // 2. JUDUL DINAMIS BERDASARKAN ENVIRONMENT
+        title: Text(
+          EnvConfig.isProduction ? 'Katalog UTD [PRODUCTION]' : 'Katalog UTD [DEV]',
+        ),
+        // 3. WARNA HEADER DINAMIS (Prod = Hijau, Dev = Biru Gelap)
+        backgroundColor: EnvConfig.isProduction ? Colors.green.shade800 : Colors.blueGrey,
         actions: [
-          // TOMBOL BARU: HALAMAN ANIMASI
           IconButton(
             icon: const Icon(Icons.animation), 
             tooltip: 'Halaman Animasi',
@@ -22,10 +27,9 @@ class ProductPage extends StatelessWidget {
             },
           ),
           IconButton(
-            icon: const Icon(Icons.cloud_sync), // Ikon awan sinkronisasi
-            tooltip: 'Pengaturan Background', // Teks kecil saat ikon ditahan
+            icon: const Icon(Icons.cloud_sync), 
+            tooltip: 'Pengaturan Background', 
             onPressed: () {
-              // Berpindah ke halaman sync menggunakan GoRouter
               context.push('/sync'); 
             },
           ),
@@ -48,19 +52,16 @@ class ProductPage extends StatelessWidget {
     
       body: BlocBuilder<ProductCubit, ProductState>(
         builder: (context, state) {
-          // 1. JIKA STATE = LOADING (Tampilkan indikator putar)
           if (state is ProductLoading) {
             return const Center(child: CircularProgressIndicator());
           }
-          // 2. JIKA STATE = ERROR (Tampilkan pesan error)
           else if (state is ProductError) {
             return Center(
               child: Text(state.message, style: const TextStyle(color: Colors.red, fontSize: 16)),
             );
           }
-          // 3. JIKA STATE = SUKSES (Tampilkan ListView)
           else if (state is ProductLoaded) {
-            final products = state.products; // Keluarkan data dari kotaknya!
+            final products = state.products; 
             
             return ListView.builder(
               itemCount: products.length,
@@ -91,12 +92,9 @@ class ProductPage extends StatelessWidget {
               },
             );
           }
-          
-          // Fallback (jika state tidak dikenali)
           return const SizedBox.shrink();
         },
       ),
-      // FLOATING ACTION BUTTON SEKARANG ADA DI SINI (Sejajar dengan appBar dan body)
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           context.push('/crypto');

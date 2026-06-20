@@ -31,3 +31,13 @@ subprojects {
         }
     }
 }
+
+subprojects {
+    configurations.configureEach {
+        resolutionStrategy.eachDependency {
+            if (requested.group == "androidx.core") {
+                useVersion("1.6.0")
+            }
+        }
+    }
+}
