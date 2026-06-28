@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:utd_advanced_app/features/animation/presentation/pages/animation_page.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -77,12 +78,29 @@ class _LoginScreenState extends State<LoginScreen> {
 class SuksesScreen extends StatelessWidget {
   const SuksesScreen({super.key});
 
-  @override
+ @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Beranda Utama')),
-      body: const Center(
-        child: Text('Selamat Datang Admin!', style: TextStyle(fontSize: 24)),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text('Selamat Datang Admin!', style: TextStyle(fontSize: 24)),
+            const SizedBox(height: 30), // Memberi jarak agar tidak nempel
+            
+            // Ini tombol baru untuk menuju ke halaman lengkapmu
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AnimationPage()),
+                );
+              },
+              child: const Text('Buka Menu Lengkap'),
+            ),
+          ],
+        ),
       ),
     );
   }
