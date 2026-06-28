@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:utd_advanced_app/core/theme/app_theme.dart';
 import 'package:utd_advanced_app/core/routing/app_router.dart';
 import 'package:utd_advanced_app/core/di/injection.dart';
-import 'package:utd_advanced_app/core/config/env_config.dart'; // 1. IMPORT CONFIG BARU DI SINI! [cite: 324]
+import 'package:utd_advanced_app/core/config/env_config.dart';
 import 'package:workmanager/workmanager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/intl.dart';
+
+// 🔥 IMPORT HALAMAN LOGIN BARU DI SINI UNTUK INTEGRATION TEST [cite: 379]
+import 'package:utd_advanced_app/features/auth/presentation/pages/login_screen.dart';
 
 // 1. NAMA TUGAS (Konstanta agar tidak salah ketik)
 const String syncTask = "tugas_sinkronisasi_rutin";
@@ -56,14 +59,16 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Ubah dari MaterialApp biasa menjadi MaterialApp.router
-    return MaterialApp.router(
-      // 2. SEKARANG PITA DEBUG INI BISA DIKONTROL DARI TERMINAL / LAUNCH PROFILE! [cite: 331]
+    // 🛠️ MODIFIKASI SEMENTARA UNTUK INTEGRATION TEST [cite: 401]
+    // Kita ubah MaterialApp.router menjadi MaterialApp biasa agar robot langsung tertuju ke LoginScreen [cite: 350, 401]
+    return MaterialApp(
       debugShowCheckedModeBanner: EnvConfig.showDebugBanner,
       title: 'UTD Advanced App',
       theme: AppTheme.lightTheme,
-      // Masukkan konfigurasi rute dari app_router.dart
-      routerConfig: AppRouter.router, 
+      home: const LoginScreen(), // Robot akan langsung mendarat di halaman ini! [cite: 401]
+      
+      // Catatan: routerConfig sengaja dimatikan sementara agar tidak bentrok dengan 'home:'
+      // routerConfig: AppRouter.router, 
     );
   }
 }
