@@ -1,57 +1,44 @@
-# Nama Robot Pipeline kita
 name: UTD Advanced CI/CD Pipeline
 
-# Kapan robot ini bekerja? (Setiap kali ada 'push' atau 'pull request' ke branch 'main' atau 'master')
 on:
   push:
     branches: [ "main", "master" ]
   pull_request:
     branches: [ "main", "master" ]
 
-# Apa saja tugas (Jobs) si Robot?
 jobs:
   build_and_test:
-    # Komputer server yang disewa (Gratis dari GitHub)
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Mengunduh kode dari repository Anda ke server GitHub
       - name: Download / Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      # 2. Menginstal Java JDK (dibutuhkan untuk kompilasi Android)
       - name: Setup Java JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: '17'
 
-      # 3. Menginstal Flutter SDK ke dalam server GitHub
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
 
-      # 4. Mengunduh semua package/dependencies (dio, bloc, isar, dll)
       - name: Install Dependencies
         run: flutter pub get
 
-      # 5. Membangun ulang file generate Isar / build_runner
       - name: Run Build Runner
         run: flutter pub run build_runner build --delete-conflicting-outputs
 
-      # 6. Menjalankan Robot Penguji (Unit Test/Widget Test)
-      # Jika langkah ini gagal, proses di bawahnya otomatis dibatalkan demi keamanan aplikasi!
       - name: Run Automated Tests
         run: flutter test
 
-      # 7. Jika semua tes lolos, rakit file APK versi Release!
       - name: Build APK Release
         run: flutter build apk --release
 
-      # 8. Upload file APK ke halaman GitHub agar bisa di-download oleh siapa saja
       - name: Upload APK Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: UTD-Advanced-Release-APK
           path: build/app/outputs/flutter-apk/app-release.apk
