@@ -61,11 +61,11 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // 🛠️ MODIFIKASI SEMENTARA UNTUK INTEGRATION TEST [cite: 401]
     // Kita ubah MaterialApp.router menjadi MaterialApp biasa agar robot langsung tertuju ke LoginScreen [cite: 350, 401]
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: EnvConfig.showDebugBanner,
       title: 'UTD Advanced App',
       theme: AppTheme.lightTheme,
-      home: const LoginScreen(), // Robot akan langsung mendarat di halaman ini! [cite: 401]
+      routerConfig: AppRouter.router, // Robot akan langsung mendarat di halaman ini! [cite: 401]
       
       // Catatan: routerConfig sengaja dimatikan sementara agar tidak bentrok dengan 'home:'
       // routerConfig: AppRouter.router, 

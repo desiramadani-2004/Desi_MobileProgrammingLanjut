@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:utd_advanced_app/features/animation/presentation/pages/animation_page.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -78,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
 class SuksesScreen extends StatelessWidget {
   const SuksesScreen({super.key});
 
- @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Beranda Utama')),
@@ -92,10 +93,7 @@ class SuksesScreen extends StatelessWidget {
             // Ini tombol baru untuk menuju ke halaman lengkapmu
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const AnimationPage()),
-                );
+                context.go('/'); // Sisa kurung di bawah baris ini sudah dihapus
               },
               child: const Text('Buka Menu Lengkap'),
             ),

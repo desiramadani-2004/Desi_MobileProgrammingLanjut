@@ -1,3 +1,4 @@
+import 'package:utd_advanced_app/features/auth/presentation/pages/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'; 
@@ -14,8 +15,12 @@ import 'package:utd_advanced_app/features/animation/presentation/pages/animation
 
 class AppRouter {
   static final router = GoRouter(
-    initialLocation: '/',
+    initialLocation: '/login',
     routes: [
+      GoRoute(
+        path: '/login',
+        builder: (context, state) => const LoginScreen(),
+      ),
       GoRoute(
         path: '/',
         builder: (context, state) {
